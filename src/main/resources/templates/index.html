@@ -12,9 +12,42 @@
 	<!--[if lt IE 9]>
 <script src="js/html5.js"></script>
 <script src="js/css3-mediaqueries.js"></script>
+<script src="js/css3-mediaqueries.js"></script>
 <![endif]-->
 	<script th:src="@{js/jquery1.7.2.min.js}"></script>
 	<script th:src="@{js/script.js}"></script>
+	<script th:src="@{js/common.js}"></script>
+	<script type="text/javascript">
+		function call_login(item) {
+			console.log("call_login");
+			//リクエスト詰め替え
+			const form = document.forms.login_form;
+
+			console.log($('form').serializeArray());
+			requestJson = parseJson($('form').serializeArray());
+			console.log(requestJson);
+
+			async function execute(path, requestJson) {
+				const response = await sendRequest(path, requestJson);
+				await handleResponse(response);
+
+				//ログイン結果チェック
+				if (response.status === 200) {
+					//チェックOKの場合画面遷移する
+					console.log("response:OK");
+					goToPage("/view/top");
+				} else {
+					console.log("response:ng");
+					//invalidクラスを追加
+					//エラーメッセージをセット
+				}
+			}
+
+			//ログインする fetch使用
+			const response = execute('/user/login', requestJson);
+		}
+
+	</script>
 	<style type="text/css">
 		.bs-component+.bs-component {
 			margin-top: 1rem;
@@ -96,12 +129,13 @@
 								</div>
 							</div>
 						</div>
-						<form>
-							<fieldset>
+						<form name="login_form">
+							<fieldset name="login_fieldset">
 								<div class="form-group">
 									<label for="exampleInputEmail1">メールアドレス</label>
 									<input type="email" class="form-control" id="exampleInputEmail1"
-										aria-describedby="emailHelp" placeholder="Enter email">
+										name="exampleInputEmail1" aria-describedby="emailHelp"
+										placeholder="Enter email">
 									<small id="emailHelp" class="form-text text-muted">We'll never share your email with
 										anyone
 										else.</small>
@@ -109,10 +143,10 @@
 								<div class="form-group">
 									<label for="exampleInputPassword1">パスワード</label>
 									<input type="password" class="form-control" id="exampleInputPassword1"
-										placeholder="Password">
+										name="exampleInputPassword1" placeholder="Password">
 								</div>
 							</fieldset>
-							<button type="submit" class="btn btn-primary">ログイン</button>
+							<button type="button" class="btn btn-primary" onclick="call_login()">ログイン</button>
 						</form>
 					</section>
 					<section class="bs-docs-section">
