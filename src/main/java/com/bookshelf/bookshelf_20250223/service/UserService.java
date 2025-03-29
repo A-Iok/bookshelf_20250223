@@ -25,11 +25,8 @@ public class UserService {
 
         int[] idList = tUserRepository.getUserAtLogin(inputDto.getMailAddress(), inputDto.getPassword());
 
-        if (ObjectUtils.isEmpty(idList)) {
-            log.error("DB取得結果がエラー" + String.valueOf(idList));
-            return false;
-        }
-        if (idList.length == 0) {
+        if (ObjectUtils.isEmpty(idList)
+                || idList.length == 0) {
             log.info("取得結果0件" + String.valueOf(idList));
             return false;
         }

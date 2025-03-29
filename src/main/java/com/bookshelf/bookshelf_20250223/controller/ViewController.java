@@ -8,10 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/view")
+@RequestMapping("/")
 public class ViewController {
 
-    @GetMapping("/top")
+    @GetMapping("top")
     public String top() {
         log.info("/top start");
 
