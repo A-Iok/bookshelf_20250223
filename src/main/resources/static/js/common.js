@@ -52,7 +52,7 @@ var parseJson = function (data) {
     for (idx = 0; idx < data.length; idx++) {
         returnJson[data[idx].name] = data[idx].value
     }
-    return returnJson;
+    return JSON.stringify(returnJson);
 }
 
 // 4xx系, 5xx系のエラーをさばくハンドラ

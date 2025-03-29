@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,23 +43,33 @@ public class UserController {
 
     @PostMapping("/login")
     @ResponseBody
-    public ResponseEntity<String> postLogin(@RequestBody String entity) {
-        log.info("/login start." + entity);
+    public ResponseEntity<String> postLogin(@RequestBody LoginInputDto requestDto) {
+        log.info("開始：/login" + requestDto.toString());
 
-        // バリデーションチェック
+        // // バリデーションチェック
+        // if (bindingResult.hasErrors()) {
+        // log.info("バリデーションエラーあり");
+        // return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        // }
+
         // serviceを呼ぶ
-        // response.okかngを返却
+        boolean loginFlag = userService.login(requestDto);
 
+        if (!loginFlag) {
+            log.info("バリデーションエラーあり");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        // response.okかngを返却
         HttpStatus status = HttpStatus.OK;
 
-        ObjectMapper mapper = new ObjectMapper();
-        LoginInputDto loginInputDto = new LoginInputDto();
-        loginInputDto.setMailAddress("a");
-        loginInputDto.setPassword("p");
+        // ObjectMapper mapper = new ObjectMapper();
+        // LoginInputDto loginInputDto = new LoginInputDto();
+        // loginInputDto.setMailAddress("a");
+        // loginInputDto.setPassword("p");
 
         // String json = mapper.writeValueAsString(loginInputDto);
-        return new ResponseEntity<String>("{\"name\":\"Nobunaga\", \"email\":\"nobunaga@gmail.com\"}", status);
-
+        return new ResponseEntity<String>("{\"response\":\"200ok\"}", status);
     }
 
 }
