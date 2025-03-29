@@ -20,4 +20,9 @@ public class LoginInputDto implements Serializable {
     @NotNull(message = "パスワードは必ず入力してください。")
     private String password;
 
+    @Override
+    public String toString() {
+        return "LoginInputDto [mailAddress=" + mailAddress + ", password=" + password + "]";
+    }
+
 }
