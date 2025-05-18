@@ -23,31 +23,23 @@ public class TUser implements Serializable {
     @Column(name = "user_name")
     private String userName;
 
-    @Column(name = "password")
-    private String password;
-
     @Column(name = "mailaddress")
     private String mailaddress;
-
-    @Column(name = "created_at")
-    private Date createdAt;
 
     public TUser() {
     }
 
-    public TUser(String id, String userName, String password, String mailaddress, Date createdAt) {
+    public TUser(String id, String userName, String mailaddress, Date createdAt) {
         this.id = id;
         this.userName = userName;
-        this.password = password;
         this.mailaddress = mailaddress;
-        this.createdAt = createdAt;
 
     }
 
     @Override
     public String toString() {
-        return "TUser [getCreatedAt()=" + getCreatedAt() + ", getId()=" + getId() + ", getMailaddress()="
-                + getMailaddress() + ", getPassword()=" + getPassword() + ", getUserName()=" + getUserName() + "]";
+        return "TUser [getId()=" + getId() + ", getMailaddress()="
+                + getMailaddress() + ", getUserName()=" + getUserName() + "]";
     }
 
 }

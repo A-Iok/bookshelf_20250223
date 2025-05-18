@@ -17,6 +17,11 @@
 	<script th:src="@{js/jquery1.7.2.min.js}"></script>
 	<script th:src="@{js/script.js}"></script>
 	<script th:src="@{js/common.js}"></script>
+	<script type="text/javascript">
+		//ページ読み込み直後のfunction実行
+		document.addEventListener("DOMContentLoaded", getUser("[[${id}]]"));
+
+	</script>
 </head>
 
 <body id="top">
@@ -33,6 +38,10 @@
 	</header>
 
 	<div id="wrapper">
+		<div>
+			<h2>ようこそ, <span id="name"></span> さん</h2>
+			<input type="hidden" id="id" value="">
+		</div>
 		<!-- コンテンツ -->
 		<section id="main">
 			<section class="content">
