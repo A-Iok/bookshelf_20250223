@@ -1,6 +1,7 @@
 package com.bookshelf.bookshelf_20250223.dto.user;
 
 import java.io.Serializable;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +12,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetUserInputDto implements Serializable {
+public class GetBooksOutputDto implements Serializable {
 
-    String id;
+    List<BookOutputDto> books;
 }

@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.bookshelf.bookshelf_20250223.dto.user.GetUserInputDto;
+import com.bookshelf.bookshelf_20250223.dto.user.GetBooksOutputDto;
 import com.bookshelf.bookshelf_20250223.dto.user.GetUserOutputDto;
 import com.bookshelf.bookshelf_20250223.dto.user.LoginInputDto;
 import com.bookshelf.bookshelf_20250223.dto.user.LoginOutputDto;
@@ -93,6 +93,20 @@ public class UserController {
 
         return ResponseEntity.ok(loginOutputDto);
         // return new ResponseEntity<String>("{\"response\":\"200ok\"}", status);
+    }
+
+    /**
+     * 本棚取得
+     * 
+     * @param requestDto
+     * @return
+     */
+    @GetMapping("/books")
+    public ResponseEntity<GetBooksOutputDto> getBooks(@RequestParam int userId, @RequestParam int bookshelfId) {
+        log.info("/books start");
+
+        GetBooksOutputDto dto = userService.getBooks(userId, bookshelfId);
+        return ResponseEntity.ok(dto);
     }
 
 }

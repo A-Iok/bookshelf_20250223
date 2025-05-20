@@ -19,7 +19,10 @@
 	<script th:src="@{js/common.js}"></script>
 	<script type="text/javascript">
 		//ページ読み込み直後のfunction実行
+		//ユーザー情報取得
 		document.addEventListener("DOMContentLoaded", getUser("[[${id}]]"));
+		document.addEventListener("DOMContentLoaded", getBooks("[[${id}]]", 1));
+
 
 	</script>
 </head>
@@ -39,8 +42,7 @@
 
 	<div id="wrapper">
 		<div>
-			<h2>ようこそ, <span id="name"></span> さん</h2>
-			<input type="hidden" id="id" value="">
+			<h6>ログイン中： <span id="id"></span> </span><span id="name"></span></h6>
 		</div>
 		<!-- コンテンツ -->
 		<section id="main">

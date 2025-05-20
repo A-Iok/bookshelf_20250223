@@ -138,3 +138,13 @@ async function getUser(id) {
     document.getElementById("id").textContent = data.id;
     document.getElementById("name").textContent = data.name;
 }
+
+//本棚取得
+async function getBooks(userId, bookshelfId) {
+    console.log("getbooks");
+    const response = await sendGetRequest("/user/books" + "?userId=" + userId + "&bookshelfId=" + bookshelfId);
+    await handleResponse(response);
+    const data = await response.json();
+    document.getElementById("id").textContent = data.id;
+    document.getElementById("name").textContent = data.name;
+}
