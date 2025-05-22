@@ -15,6 +15,6 @@ public interface TWishbookRepository extends JpaRepository<TUser, String> {
 
     // CRUDがデフォルトで使える
 
-    @Query(value = "SELECT id,name,author_name,pubulisher_name FROM public.t_book tBook inner join t_wishbook tWishbook on tBook.id = tWishbook.book_id where tWishbook.user_id = :userId and delete_flag=false", nativeQuery = true)
+    @Query(value = "SELECT id,name,author_name,publisher_name FROM public.t_book tBook inner join t_wishbook tWishbook on tBook.id = tWishbook.book_id where tWishbook.user_id = :userId and tWishbook.delete_flag=false and tBook.delete_flag=false", nativeQuery = true)
     public List<TBook> getBooks(@Param("userId") int userId);
 }

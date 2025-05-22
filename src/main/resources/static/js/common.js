@@ -144,7 +144,34 @@ async function getBooks(userId, bookshelfId) {
     console.log("getbooks");
     const response = await sendGetRequest("/user/books" + "?userId=" + userId + "&bookshelfId=" + bookshelfId);
     await handleResponse(response);
+    console.log(response);
+    console.log(response.json);
     const data = await response.json();
-    document.getElementById("id").textContent = data.id;
-    document.getElementById("name").textContent = data.name;
+    console.log(data);
+
+    //画面表示作成
+    const books = data.books; // ← 配列を取り出す
+
+    // テーブルのtbodyを取得
+    const tableBody = document.querySelector("#wish-books tbody");
+
+    // 一度tbodyをクリア（既存行を削除）
+    tableBody.innerHTML = "";
+
+    // データを1件ずつテーブルに追加
+    books.forEach(book => {
+        const row = document.createElement("tr");
+        row.className = "table-light";
+
+        const nameCell = document.createElement("th");
+        nameCell.scope = "row";
+        nameCell.textContent = book.name;
+
+        const authorCell = document.createElement("td");
+        authorCell.textContent = book.authorName;
+
+        row.appendChild(nameCell);
+        row.appendChild(authorCell);
+        tableBody.appendChild(row);
+    });
 }
