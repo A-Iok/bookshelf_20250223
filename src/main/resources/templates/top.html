@@ -27,6 +27,10 @@
 		document.addEventListener("DOMContentLoaded", getBooks("[[${id}]]", "3"));
 
 
+		function goToTop() {
+			goToPageById("/top", "[[${id}]]");
+		}
+
 	</script>
 </head>
 
@@ -36,7 +40,7 @@
 		<h1>Yomon kitob o'qish uchun hayot juda qisqa</h1>
 		<!-- ロゴ -->
 		<div class="logo">
-			<a href="index.html">
+			<a href="javascript:goToTop();">
 				<p>あなたの本棚<span>eng yaxshi o'qish hayotingiz uchun</span></p>
 			</a>
 		</div>
@@ -44,7 +48,7 @@
 	</header>
 
 	<div id="wrapper">
-		<div>
+		<div style="text-align: right">
 			<h6>ログイン中： <span id="id"></span> </span><span id="name"></span></h6>
 		</div>
 		<!-- コンテンツ -->
@@ -56,8 +60,8 @@
 						<table class="table table-hover table-striped" id="wish-books">
 							<thead>
 								<tr>
-									<th scope="col">name</th>
-									<th scope="col">author_name</th>
+									<th scope="col">書名</th>
+									<th scope="col">著者</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -77,8 +81,8 @@
 						<table class="table table-hover table-striped" id="read-books">
 							<thead>
 								<tr>
-									<th scope="col">Type</th>
-									<th scope="col">Column heading</th>
+									<th scope="col">書名</th>
+									<th scope="col">著者</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -98,8 +102,8 @@
 						<table class="table table-hover table-striped" id="collect-books">
 							<thead>
 								<tr class="table-light">
-									<th scope="col">Type</th>
-									<th scope="col">Column heading</th>
+									<th scope="col">書名</th>
+									<th scope="col">著者</th>
 								</tr>
 							</thead>
 							<tbody>

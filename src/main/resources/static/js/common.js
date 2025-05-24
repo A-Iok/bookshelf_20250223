@@ -120,6 +120,7 @@ var onRejected = function (err) {
 
 //ID指定で画面遷移を行う
 function goToPageById(filename, id) {
+    console.log("goToPageById");
     goToPage(filename, "?id=" + encodeURIComponent(id));
 }
 
