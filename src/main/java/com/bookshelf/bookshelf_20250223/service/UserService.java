@@ -15,6 +15,8 @@ import com.bookshelf.bookshelf_20250223.dto.user.LoginInputDto;
 import com.bookshelf.bookshelf_20250223.dto.user.LoginOutputDto;
 import com.bookshelf.bookshelf_20250223.entity.TBook;
 import com.bookshelf.bookshelf_20250223.entity.TUser;
+import com.bookshelf.bookshelf_20250223.repository.TCollectbookRepository;
+import com.bookshelf.bookshelf_20250223.repository.TReadbookRepository;
 import com.bookshelf.bookshelf_20250223.repository.TUserRepository;
 import com.bookshelf.bookshelf_20250223.repository.TWishbookRepository;
 
@@ -31,6 +33,12 @@ public class UserService {
 
     @Autowired
     TWishbookRepository tWishbookRepository;
+
+    @Autowired
+    TCollectbookRepository tCollectbookRepository;
+
+    @Autowired
+    TReadbookRepository tReadbookRepository;
 
     /**
      * ログイン メイン処理
@@ -87,12 +95,15 @@ public class UserService {
 
         List<TBook> booklist = new ArrayList<>();
 
+        // TODO ifを使わないようにする
         if (Bookshelf.WISH.getId() == bookShelfId) {
             booklist = tWishbookRepository.getBooks(userId);
 
-        } else if (Bookshelf.COLLECTION.getId() == bookShelfId) {
+        } else if (Bookshelf.COLLECT.getId() == bookShelfId) {
+            booklist = tCollectbookRepository.getBooks(userId);
 
-        } else if (Bookshelf.READING.getId() == bookShelfId) {
+        } else if (Bookshelf.READ.getId() == bookShelfId) {
+            booklist = tReadbookRepository.getBooks(userId);
 
         } else {
             System.out.println("本棚IDなし");

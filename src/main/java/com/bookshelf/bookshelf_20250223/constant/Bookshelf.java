@@ -5,8 +5,8 @@ package com.bookshelf.bookshelf_20250223.constant;
  */
 public enum Bookshelf {
     WISH("ほしい本棚", 1),
-    COLLECTION("ほしい本棚", 2),
-    READING("ほしい本棚", 3);
+    COLLECT("今の本棚", 2),
+    READ("読んでいる本棚", 3);
 
     private String label;
     private int id;

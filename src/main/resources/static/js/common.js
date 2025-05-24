@@ -129,7 +129,10 @@ function goToPage(filename, params) {
 }
 
 //API呼び出し
-//ユーザー情報取得
+/**
+ * ユーザー情報取得
+ * @param {string} id 
+ */
 async function getUser(id) {
     console.log("getuser");
     const response = await sendGetRequest("/user" + "?id=" + id);
@@ -139,9 +142,14 @@ async function getUser(id) {
     document.getElementById("name").textContent = data.name;
 }
 
-//本棚取得
+/**
+ * 本棚取得
+ * @param {string} userId 
+ * @param {string} bookshelfId 
+ */
 async function getBooks(userId, bookshelfId) {
     console.log("getbooks");
+
     const response = await sendGetRequest("/user/books" + "?userId=" + userId + "&bookshelfId=" + bookshelfId);
     await handleResponse(response);
     console.log(response);
@@ -150,10 +158,13 @@ async function getBooks(userId, bookshelfId) {
     console.log(data);
 
     //画面表示作成
-    const books = data.books; // ← 配列を取り出す
+    //配列を取り出す
+    const books = data.books;
+
+    const bookshelfName = getBookshelfName(bookshelfId);
 
     // テーブルのtbodyを取得
-    const tableBody = document.querySelector("#wish-books tbody");
+    const tableBody = document.querySelector("#" + bookshelfName + " tbody");
 
     // 一度tbodyをクリア（既存行を削除）
     tableBody.innerHTML = "";
@@ -175,3 +186,20 @@ async function getBooks(userId, bookshelfId) {
         tableBody.appendChild(row);
     });
 }
+
+/**
+ * 本棚IDから本棚名取得
+ * @param {string} bookshelfId 
+ * @returns 
+ */
+function getBookshelfName(bookshelfId) {
+    if (bookshelfId == "1") {
+        return "wish-books";
+    } else if (bookshelfId == "2") {
+        return "collect-books";
+    } else if (bookshelfId == "3") {
+        return "read-books";
+    }
+    console.log("error getBooks");
+}
+

@@ -21,7 +21,10 @@
 		//ページ読み込み直後のfunction実行
 		//ユーザー情報取得
 		document.addEventListener("DOMContentLoaded", getUser("[[${id}]]"));
-		document.addEventListener("DOMContentLoaded", getBooks("[[${id}]]", 1));
+		//本棚情報取得
+		document.addEventListener("DOMContentLoaded", getBooks("[[${id}]]", "1"));
+		document.addEventListener("DOMContentLoaded", getBooks("[[${id}]]", "2"));
+		document.addEventListener("DOMContentLoaded", getBooks("[[${id}]]", "3"));
 
 
 	</script>
@@ -71,7 +74,7 @@
 				<h3 class="heading"><a href="subpage.html">読んでいる本棚</a></h3>
 				<article>
 					<div class="bs-component">
-						<table class="table table-hover table-striped">
+						<table class="table table-hover table-striped" id="read-books">
 							<thead>
 								<tr>
 									<th scope="col">Type</th>
@@ -92,7 +95,7 @@
 				<h3 class="heading"><a href="subpage.html">今の本棚</a></h3>
 				<article>
 					<div class="bs-component">
-						<table class="table table-hover table-striped">
+						<table class="table table-hover table-striped" id="collect-books">
 							<thead>
 								<tr class="table-light">
 									<th scope="col">Type</th>
