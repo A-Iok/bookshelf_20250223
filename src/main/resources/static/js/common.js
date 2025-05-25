@@ -162,10 +162,10 @@ async function getBooks(userId, bookshelfId) {
     //配列を取り出す
     const books = data.books;
 
-    const bookshelfName = getBookshelfName(bookshelfId);
+    const bookshelfTableId = getBookshelfTableId(bookshelfId);
 
     // テーブルのtbodyを取得
-    const tableBody = document.querySelector("#" + bookshelfName + " tbody");
+    const tableBody = document.querySelector("#" + bookshelfTableId + " tbody");
 
     // 一度tbodyをクリア（既存行を削除）
     tableBody.innerHTML = "";
@@ -188,19 +188,46 @@ async function getBooks(userId, bookshelfId) {
     });
 }
 
+const bookshelf = [
+    {
+        bookshelfId: 1,
+        name: 'ほしい本棚',
+        tableId: "wish-books"
+    },
+    {
+        bookshelfId: 2,
+        name: '今の本棚',
+        tableId: "collect-books"
+    },
+    {
+        bookshelfId: 3,
+        name: '読んでいる本棚',
+        tableId: "read-books"
+    }
+];
+
 /**
- * 本棚IDから本棚名取得
+ * 本棚IDから本棚テーブルID取得
  * @param {string} bookshelfId 
  * @returns 
  */
-function getBookshelfName(bookshelfId) {
-    if (bookshelfId == "1") {
-        return "wish-books";
-    } else if (bookshelfId == "2") {
-        return "collect-books";
-    } else if (bookshelfId == "3") {
-        return "read-books";
-    }
-    console.log("error getBooks");
+function getBookshelfTableId(bookshelfId) {
+
+    const result = bookshelf.find((e) => e.bookshelfId == bookshelfId);
+
+    console.log("getBookshelfTableId：" + result.tableId);
+    return result.tableId;
 }
 
+/**
+ * 本棚テーブルIDから本棚ID取得
+ * @param {string} bookshelfId 
+ * @returns 
+ */
+function getBookshelfId(bookshelfTableId) {
+
+    const result = bookshelf.find((e) => e.tableId == bookshelfTableId);
+
+    console.log("getBookshelfId：" + result.bookshelfId);
+    return result.bookshelfId;
+}
