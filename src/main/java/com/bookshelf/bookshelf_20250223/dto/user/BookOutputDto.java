@@ -21,4 +21,6 @@ public class BookOutputDto implements Serializable {
 
     String publisherName;
 
+    String createdAt;
+
 }

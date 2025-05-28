@@ -15,6 +15,6 @@ public interface TCollectbookRepository extends JpaRepository<TUser, String> {
 
     // CRUDがデフォルトで使える
 
-    @Query(value = "SELECT id,name,author_name,publisher_name FROM public.t_book tBook inner join t_collectbook tCollectbook on tBook.id = tCollectbook.book_id where tCollectbook.user_id = :userId and tCollectbook.delete_flag=false and tBook.delete_flag=false order by tCollectbook.created_at desc limit 3", nativeQuery = true)
+    @Query(value = "SELECT id,name,author_name,publisher_name,tCollectbook.created_at FROM public.t_book tBook inner join t_collectbook tCollectbook on tBook.id = tCollectbook.book_id where tCollectbook.user_id = :userId and tCollectbook.delete_flag=false and tBook.delete_flag=false order by tCollectbook.created_at desc limit 3", nativeQuery = true)
     public List<TBook> getBooks(@Param("userId") int userId);
 }

@@ -144,7 +144,7 @@ async function getUser(id) {
 }
 
 /**
- * 本棚取得
+ * 本棚取得（トップ画面）
  * @param {string} userId 
  * @param {string} bookshelfId 
  */
@@ -230,4 +230,58 @@ function getBookshelfId(bookshelfTableId) {
 
     console.log("getBookshelfId：" + result.bookshelfId);
     return result.bookshelfId;
+}
+
+//Todo 本取得処理を共通化する
+/**
+ * 本棚取得（詳細画面）
+ * @param {string} userId 
+ * @param {string} bookshelfId 
+ */
+async function getBooksDetail(userId, bookshelfId) {
+    console.log("getbooksdetail");
+
+    const response = await sendGetRequest("/user/books" + "?userId=" + userId + "&bookshelfId=" + bookshelfId);
+    await handleResponse(response);
+    console.log(response);
+    console.log(response.json);
+    const data = await response.json();
+    console.log(data);
+
+    //画面表示作成
+    //配列を取り出す
+    const books = data.books;
+
+    const bookshelfTableId = getBookshelfTableId(bookshelfId);
+
+    // テーブルのtbodyを取得
+    const tableBody = document.querySelector("#" + bookshelfTableId + " tbody");
+
+    // 一度tbodyをクリア（既存行を削除）
+    tableBody.innerHTML = "";
+
+    // データを1件ずつテーブルに追加
+    books.forEach(book => {
+        const row = document.createElement("tr");
+        row.className = "table-light";
+
+        const nameCell = document.createElement("th");
+        nameCell.scope = "row";
+        nameCell.textContent = book.name;
+
+        const authorCell = document.createElement("td");
+        authorCell.textContent = book.authorName;
+
+        const publisherCell = document.createElement("td");
+        publisherCell.textContent = book.publisherName;
+
+        const createdAtCell = document.createElement("td");
+        createdAtCell.textContent = book.createdAt;
+
+        row.appendChild(nameCell);
+        row.appendChild(authorCell);
+        row.appendChild(publisherCell);
+        row.appendChild(createdAtCell);
+        tableBody.appendChild(row);
+    });
 }

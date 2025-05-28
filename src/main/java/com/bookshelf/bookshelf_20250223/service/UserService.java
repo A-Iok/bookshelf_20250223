@@ -112,7 +112,8 @@ public class UserService {
 
         List<BookOutputDto> books = booklist
                 .stream()
-                .map(e -> new BookOutputDto(e.getId(), e.getName(), e.getAuthorName(), e.getPublisherName()))
+                .map(e -> new BookOutputDto(e.getId(), e.getName(), e.getAuthorName(), e.getPublisherName(),
+                        e.getCreatedAt()))
                 .toList();
 
         GetBooksOutputDto returnDto = new GetBooksOutputDto(books);

@@ -29,20 +29,25 @@ public class TBook implements Serializable {
     @Column(name = "publisher_name")
     private String publisherName;
 
+    @Column(name = "created_at")
+    private String createdAt;
+
     public TBook() {
     }
 
-    public TBook(String id, String name, String authorName, String publisherName) {
+    public TBook(String id, String name, String authorName, String publisherName, String createdAt) {
         this.id = id;
         this.name = name;
         this.authorName = authorName;
         this.publisherName = publisherName;
+        this.createdAt = createdAt;
     }
 
     @Override
     public String toString() {
         return "TBook [id=" + id + ", name=" + name + ", authorName=" + authorName + ", publisherName="
-                + publisherName + "]";
+                + publisherName + ", createdAt="
+                + createdAt + "]";
     }
 
 }

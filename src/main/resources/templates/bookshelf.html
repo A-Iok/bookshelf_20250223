@@ -22,7 +22,7 @@
 		//ユーザー情報取得
 		document.addEventListener("DOMContentLoaded", getUser("[[${id}]]"));
 		//本棚情報取得
-		document.addEventListener("DOMContentLoaded", getBooks("[[${id}]]", "[[${bookshelfId}]]"));
+		document.addEventListener("DOMContentLoaded", getBooksDetail("[[${id}]]", "[[${bookshelfId}]]"));
 
 		function goToTop() {
 			goToPageById("/top", "[[${id}]]");
