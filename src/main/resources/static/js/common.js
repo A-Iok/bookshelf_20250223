@@ -220,6 +220,19 @@ function getBookshelfTableId(bookshelfId) {
 }
 
 /**
+ * 本棚IDから本棚名取得
+ * @param {string} bookshelfId 
+ * @returns 
+ */
+function getBookshelfName(bookshelfId) {
+
+    const result = bookshelf.find((e) => e.bookshelfId == bookshelfId);
+
+    console.log("getBookshelfName" + result.name);
+    return result.name;
+}
+
+/**
  * 本棚テーブルIDから本棚ID取得
  * @param {string} bookshelfId 
  * @returns 

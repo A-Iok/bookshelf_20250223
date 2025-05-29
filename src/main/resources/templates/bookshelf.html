@@ -21,8 +21,6 @@
 		//ページ読み込み直後のfunction実行
 		//ユーザー情報取得
 		document.addEventListener("DOMContentLoaded", getUser("[[${id}]]"));
-		//本棚情報取得
-		document.addEventListener("DOMContentLoaded", getBooksDetail("[[${id}]]", "[[${bookshelfId}]]"));
 
 		function goToTop() {
 			goToPageById("/top", "[[${id}]]");
@@ -31,7 +29,6 @@
 		function goToBookshelf(bookshelfTableId) {
 			goToPage("/bookshelf", "?id=" + encodeURIComponent("[[${id}]]") + "&bookshelfId=" + encodeURIComponent(getBookshelfId(bookshelfTableId)));
 		}
-
 
 	</script>
 </head>
@@ -56,10 +53,10 @@
 		<!-- コンテンツ -->
 		<section id="main">
 			<section class="content">
-				<h3 class="heading"><a href="javascript:goToBookshelf();">欲しい本棚</a></h3>
+				<h3 class="heading" id="bookshelf-name">欲しい本棚</h3>
 				<article>
 					<div class="bs-component">
-						<table class="table table-hover table-striped" id="wish-books">
+						<table class="table table-hover table-striped" id="books">
 							<thead>
 								<tr>
 									<th scope="col">書名</th>
@@ -104,6 +101,23 @@
 	<address>Copyright(c) 2013 Sample Inc. All Rights Reserved. Design by <a href="http://f-tpl.com" target="_blank"
 			rel="nofollow">http://f-tpl.com</a></address>
 
+	<script type="text/javascript">
+		//ページ読み込み直後のfunction実行
+
+		//本棚名とIDをセット
+		document.addEventListener("DOMContentLoaded", setBookshelfId());
+		//本棚情報取得
+		document.addEventListener("DOMContentLoaded", getBooksDetail("[[${id}]]", "[[${bookshelfId}]]"));
+
+		function setBookshelfId() {
+			document.getElementById('bookshelf-name').innerHTML = getBookshelfName("[[${bookshelfId}]]");
+
+			document.getElementById("books").id = getBookshelfTableId("[[${bookshelfId}]]");
+			console.log("setBookshelfId");
+		}
+
+
+	</script>
 </body>
 
 </html>
